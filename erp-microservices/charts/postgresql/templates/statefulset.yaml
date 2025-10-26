@@ -1,0 +1,79 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgresql
+  namespace: {{ .Values.global.namespace }}
+  labels:
+    app: postgresql
+spec:
+  serviceName: postgresql
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresql
+  template:
+    metadata:
+      labels:
+        app: postgresql
+    spec:
+      initContainers:
+      - name: init-databases
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        command:
+          - bash
+          - "-c"
+          - |
+            sleep 20
+            {{- range .Values.auth.databases }}
+            PGPASSWORD={{ $.Values.auth.password }} psql -h localhost -U {{ $.Values.auth.username }} -d postgres -c "CREATE DATABASE \"{{ . }}\";" || true
+            {{- end }}
+        env:
+        - name: PGHOST
+          value: "localhost"
+      containers:
+      - name: postgresql
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 5432
+          name: postgres
+        env:
+        - name: POSTGRES_USER
+          value: {{ .Values.auth.username | quote }}
+        - name: POSTGRES_PASSWORD
+          value: {{ .Values.auth.password | quote }}
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        volumeMounts:
+        - name: postgres-storage
+          mountPath: /var/lib/postgresql/data
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+        livenessProbe:
+          exec:
+            command:
+              - pg_isready
+              - -U
+              - {{ .Values.auth.username }}
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          exec:
+            command:
+              - pg_isready
+              - -U
+              - {{ .Values.auth.username }}
+          initialDelaySeconds: 5
+          periodSeconds: 5
+  {{- if .Values.persistence.enabled }}
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      {{- if .Values.persistence.storageClass }}
+      storageClassName: {{ .Values.persistence.storageClass }}
+      {{- end }}
+      resources:
+        requests:
+          storage: {{ .Values.persistence.size }}
+  {{- end }}

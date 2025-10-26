@@ -1,0 +1,25 @@
+image:
+  repository: postgres
+  tag: "15"
+
+auth:
+  username: postgres
+  password: changeme
+  databases:
+    - auth-service
+    - hr-service
+    - finance-service
+    - reporting-service
+
+persistence:
+  enabled: true
+  size: 20Gi
+  storageClass: gp3
+
+resources:
+  requests:
+    memory: "512Mi"
+    cpu: "250m"
+  limits:
+    memory: "1Gi"
+    cpu: "500m"

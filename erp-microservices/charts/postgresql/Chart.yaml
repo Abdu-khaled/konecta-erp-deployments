@@ -1,0 +1,5 @@
+apiVersion: v2
+name: postgresql
+description: PostgreSQL database for ERP services
+version: 1.0.0
+type: application
