@@ -1,0 +1,93 @@
+# Base values shared across all environments
+global:
+  registry: abdelrahman404
+  imagePullPolicy: IfNotPresent
+
+postgresql:
+  enabled: true
+  image:
+    repository: postgres
+    tag: "15"
+  auth:
+    username: postgres
+    password: changeme
+    databases:
+      - auth-service
+      - hr-service
+      - finance-service
+      - reporting-service
+  persistence:
+    enabled: true
+
+discovery-server:
+  enabled: true
+  image:
+    repository: konecta-discovery-server
+    tag: "develop-29ae71d"
+  service:
+    type: ClusterIP
+    port: 8080
+
+gateway-service:
+  image:
+    repository: konecta-gateway-service
+    tag: "develop-29ae71d"
+  service:
+    type: LoadBalancer
+    port: 8080
+  ingress:
+    enabled: false
+
+auth-service:
+  image:
+    repository: konecta-auth-service
+    tag: "develop-29ae71d"
+  service:
+    type: ClusterIP
+    port: 8081
+  database:
+    host: postgresql
+    name: auth-service
+
+hr-service:
+  image:
+    repository: konecta-hr-service
+    tag: "develop-29ae71d"
+  service:
+    type: ClusterIP
+    port: 8082
+  database:
+    host: postgresql
+    name: hr-service
+
+finance-service:
+  image:
+    repository: konecta-finance-service
+    tag: "develop-29ae71d"
+  service:
+    type: ClusterIP
+    port: 8083
+  database:
+    host: postgresql
+    name: finance-service
+
+reporting-service:
+  image:
+    repository: konecta-reporting-service
+    tag: "develop-29ae71d"
+  service:
+    type: ClusterIP
+    port: 8080
+  database:
+    host: postgresql
+    name: reporting-service
+
+frontend:
+  image:
+    repository: konecta-frontend
+    tag: "develop-29ae71d"
+  service:
+    type: ClusterIP
+    port: 80
+  ingress:
+    enabled: false

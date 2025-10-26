@@ -1,0 +1,36 @@
+apiVersion: v2
+name: erp-microservices
+description: ERP System with Spring Cloud microservices
+version: 1.0.0
+type: application
+appVersion: "1.0.0"
+maintainers:
+  - name: Your Name
+    email: your.email@example.com
+
+dependencies:
+  - name: postgresql
+    version: "1.0.0"
+    repository: "file://./charts/postgresql"
+  - name: discovery-server
+    version: "1.0.0"
+    repository: "file://./charts/discovery-server"
+    condition: discovery-server.enabled
+  - name: gateway-service
+    version: "1.0.0"
+    repository: "file://./charts/gateway-service"
+  - name: auth-service
+    version: "1.0.0"
+    repository: "file://./charts/auth-service"
+  - name: hr-service
+    version: "1.0.0"
+    repository: "file://./charts/hr-service"
+  - name: finance-service
+    version: "1.0.0"
+    repository: "file://./charts/finance-service"
+  - name: reporting-service
+    version: "1.0.0"
+    repository: "file://./charts/reporting-service"
+  - name: frontend
+    version: "1.0.0"
+    repository: "file://./charts/frontend"
