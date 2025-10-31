@@ -2,6 +2,7 @@
 global:
   registry: abdelrahman404
   imagePullPolicy: IfNotPresent
+createNamespace: false
 
 postgresql:
   enabled: true
@@ -10,70 +11,86 @@ postgresql:
     tag: "15"
   auth:
     username: postgres
-    password: changeme
+    password: 1234
     databases:
       - auth-service
       - hr-service
       - finance-service
       - reporting-service
+      - inventory-service
   persistence:
     enabled: true
 
 discovery-server:
   enabled: true
   image:
-    repository: konecta-discovery-server
-    tag: "develop-29ae71d"
+    repository: abdelrahman404/konecta-discovery-server
+    tag: "develop-1c6f717"
   service:
     type: ClusterIP
     port: 8080
 
+config-server:
+  image:
+    repository: abdelrahman404/konecta-config-server
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 8888
+  containerPort: 8080
+
 gateway-service:
   image:
-    repository: konecta-gateway-service
+    repository: abdelrahman404/konecta-gateway-service
     tag: "develop-29ae71d"
   service:
     type: LoadBalancer
-    port: 8080
+    port: 8084
   ingress:
     enabled: false
 
 auth-service:
   image:
-    repository: konecta-auth-service
+    repository: abdelrahman404/konecta-auth-service
     tag: "develop-29ae71d"
   service:
     type: ClusterIP
-    port: 8081
+    port: 8089
   database:
     host: postgresql
     name: auth-service
+    username: postgres
+    password: 1234
 
 hr-service:
   image:
-    repository: konecta-hr-service
+    repository: abdelrahman404/konecta-hr-service
     tag: "develop-29ae71d"
   service:
     type: ClusterIP
-    port: 8082
+    port: 8088
   database:
     host: postgresql
     name: hr-service
+    username: postgres
+    password: 1234
 
 finance-service:
   image:
-    repository: konecta-finance-service
+    repository: abdelrahman404/konecta-finance-service
     tag: "develop-29ae71d"
   service:
     type: ClusterIP
-    port: 8083
+    port: 8087
   database:
     host: postgresql
     name: finance-service
+    username: postgres
+    password: 1234
 
 reporting-service:
   image:
-    repository: konecta-reporting-service
+    repository: abdelrahman404/konecta-reporting-service
     tag: "develop-29ae71d"
   service:
     type: ClusterIP
@@ -81,13 +98,37 @@ reporting-service:
   database:
     host: postgresql
     name: reporting-service
+    username: postgres
+    password: 1234
 
 frontend:
   image:
-    repository: konecta-frontend
+    repository: abdelrahman404/konecta-frontend
     tag: "develop-29ae71d"
   service:
     type: ClusterIP
     port: 80
   ingress:
     enabled: false
+
+inventory-service:
+  image:
+    repository: abdelrahman404/konecta-inventory-service
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 8086
+  database:
+    host: postgresql
+    name: inventory-service
+    username: postgres
+    password: 1234
+
+mailhog:
+  image:
+    repository: mailhog/mailhog
+    tag: "latest"
+  service:
+    type: ClusterIP
+    httpPort: 8025
+    smtpPort: 1025

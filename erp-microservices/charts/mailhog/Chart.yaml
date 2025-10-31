@@ -1,0 +1,7 @@
+apiVersion: v2
+name: mailhog
+description: Mailhog SMTP testing server
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
+

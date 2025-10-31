@@ -16,6 +16,9 @@ dependencies:
     version: "1.0.0"
     repository: "file://./charts/discovery-server"
     condition: discovery-server.enabled
+  - name: config-server
+    version: "0.1.0"
+    repository: "file://./charts/config-server"
   - name: gateway-service
     version: "1.0.0"
     repository: "file://./charts/gateway-service"
@@ -34,3 +37,9 @@ dependencies:
   - name: frontend
     version: "1.0.0"
     repository: "file://./charts/frontend"
+  - name: inventory-service
+    version: "0.1.0"
+    repository: "file://./charts/inventory-service"
+  - name: mailhog
+    version: "0.1.0"
+    repository: "file://./charts/mailhog"
