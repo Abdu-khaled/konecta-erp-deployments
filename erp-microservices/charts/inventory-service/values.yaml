@@ -4,7 +4,7 @@ replicaCount: 1
 image:
   repository: abdelrahman404/konecta-inventory-service
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "develop-11ee2d9"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -58,14 +58,20 @@ livenessProbe:
   httpGet:
     path: /actuator/health
     port: http
-  initialDelaySeconds: 90
+  initialDelaySeconds: 180
   periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+
 readinessProbe:
   httpGet:
     path: /actuator/health/readiness
     port: http
-  initialDelaySeconds: 60
-  periodSeconds: 5
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 10
+
 
 autoscaling:
   enabled: false

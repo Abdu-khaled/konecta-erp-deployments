@@ -1,0 +1,36 @@
+dependencies:
+- name: postgresql
+  repository: file://./charts/postgresql
+  version: 1.0.0
+- name: discovery-server
+  repository: file://./charts/discovery-server
+  version: 0.1.0
+- name: config-server
+  repository: file://./charts/config-server
+  version: 0.1.0
+- name: gateway-service
+  repository: file://./charts/gateway-service
+  version: 0.1.0
+- name: auth-service
+  repository: file://./charts/auth-service
+  version: 0.1.0
+- name: hr-service
+  repository: file://./charts/hr-service
+  version: 0.1.0
+- name: finance-service
+  repository: file://./charts/finance-service
+  version: 0.1.0
+- name: reporting-service
+  repository: file://./charts/reporting-service
+  version: 0.1.0
+- name: frontend
+  repository: file://./charts/frontend
+  version: 0.1.0
+- name: inventory-service
+  repository: file://./charts/inventory-service
+  version: 0.1.0
+- name: mailhog
+  repository: file://./charts/mailhog
+  version: 0.1.0
+digest: sha256:bb07f144657f85c2f235ddfd81267df6bf92b4a2020323fde856991a61d92b16
+generated: "2025-10-31T19:12:32.961255154+02:00"

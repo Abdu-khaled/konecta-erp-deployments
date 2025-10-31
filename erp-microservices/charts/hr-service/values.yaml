@@ -8,7 +8,7 @@ replicaCount: 1
 image:
   repository: abdelrahman404/konecta-hr-service
   pullPolicy: IfNotPresent
-  tag: "develop-29ae71d"
+  tag: "develop-11ee2d9"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -62,14 +62,20 @@ livenessProbe:
   httpGet:
     path: /actuator/health
     port: http
-  initialDelaySeconds: 90
+  initialDelaySeconds: 180
   periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+
 readinessProbe:
   httpGet:
     path: /actuator/health/readiness
     port: http
-  initialDelaySeconds: 60
-  periodSeconds: 5
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 10
+
 
 autoscaling:
   enabled: false
@@ -94,3 +100,5 @@ env:
     value: "prod"
   - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
     value: "http://discovery-server:8080/eureka/"
+
+# Gateway API HTTPRoute configuration (disabled by default)

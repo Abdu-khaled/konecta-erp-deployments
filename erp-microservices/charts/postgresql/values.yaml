@@ -10,6 +10,11 @@ auth:
     - hr-service
     - finance-service
     - reporting-service
+    - inventory-service
+
+# Gateway API HTTPRoute configuration (disabled by default)
+httpRoute:
+  enabled: false
 
 persistence:
   enabled: true
@@ -23,3 +28,9 @@ resources:
   limits:
     memory: "1Gi"
     cpu: "500m"
+
+# Ingress toggle (for templates that reference it)
+ingress:
+  enabled: false
+
+# Gateway API HTTPRoute configuration (disabled by default)

@@ -8,7 +8,7 @@ replicaCount: 1
 image:
   repository: abdelrahman404/konecta-finance-service
   pullPolicy: IfNotPresent
-  tag: "develop-29ae71d"
+  tag: "develop-11ee2d9"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -94,3 +94,4 @@ env:
     value: "docker"
   - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
     value: "http://discovery-server:8080/eureka/"
+

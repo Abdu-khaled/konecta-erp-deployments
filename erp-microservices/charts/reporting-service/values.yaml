@@ -8,7 +8,7 @@ replicaCount: 1
 image:
   repository: abdelrahman404/konecta-reporting-service
   pullPolicy: IfNotPresent
-  tag: "develop-29ae71d"
+  tag: "develop-11ee2d9"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -60,16 +60,21 @@ resources:
 
 livenessProbe:
   httpGet:
-    path: /health
+    path: /actuator/health
     port: http
-  initialDelaySeconds: 60
+  initialDelaySeconds: 180
   periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+
 readinessProbe:
   httpGet:
-    path: /health
+    path: /actuator/health/readiness
     port: http
-  initialDelaySeconds: 30
-  periodSeconds: 5
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 10
 
 autoscaling:
   enabled: false
@@ -88,3 +93,5 @@ env:
     value: "Development"
   - name: ConnectionStrings__DefaultConnection
     value: "Host=postgresql;Port=5432;Database=reporting-service;Username=postgres;Password=1234"
+
+

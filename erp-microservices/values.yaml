@@ -25,7 +25,7 @@ discovery-server:
   enabled: true
   image:
     repository: abdelrahman404/konecta-discovery-server
-    tag: "develop-1c6f717"
+    tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8080
@@ -33,7 +33,7 @@ discovery-server:
 config-server:
   image:
     repository: abdelrahman404/konecta-config-server
-    tag: "latest"
+    tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8888
@@ -42,7 +42,7 @@ config-server:
 gateway-service:
   image:
     repository: abdelrahman404/konecta-gateway-service
-    tag: "develop-29ae71d"
+    tag: "develop-11ee2d9"
   service:
     type: LoadBalancer
     port: 8084
@@ -52,7 +52,7 @@ gateway-service:
 auth-service:
   image:
     repository: abdelrahman404/konecta-auth-service
-    tag: "develop-29ae71d"
+    tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8089
@@ -65,7 +65,7 @@ auth-service:
 hr-service:
   image:
     repository: abdelrahman404/konecta-hr-service
-    tag: "develop-29ae71d"
+    tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8088
@@ -78,7 +78,7 @@ hr-service:
 finance-service:
   image:
     repository: abdelrahman404/konecta-finance-service
-    tag: "develop-29ae71d"
+    tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8087
@@ -91,7 +91,7 @@ finance-service:
 reporting-service:
   image:
     repository: abdelrahman404/konecta-reporting-service
-    tag: "develop-29ae71d"
+    tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8080
@@ -104,7 +104,7 @@ reporting-service:
 frontend:
   image:
     repository: abdelrahman404/konecta-frontend
-    tag: "develop-29ae71d"
+    tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 80
@@ -114,7 +114,7 @@ frontend:
 inventory-service:
   image:
     repository: abdelrahman404/konecta-inventory-service
-    tag: "latest"
+    tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8086

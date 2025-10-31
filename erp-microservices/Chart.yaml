@@ -13,29 +13,29 @@ dependencies:
     version: "1.0.0"
     repository: "file://./charts/postgresql"
   - name: discovery-server
-    version: "1.0.0"
+    version: "0.1.0"
     repository: "file://./charts/discovery-server"
     condition: discovery-server.enabled
   - name: config-server
     version: "0.1.0"
     repository: "file://./charts/config-server"
   - name: gateway-service
-    version: "1.0.0"
+    version: "0.1.0"
     repository: "file://./charts/gateway-service"
   - name: auth-service
-    version: "1.0.0"
+    version: "0.1.0"
     repository: "file://./charts/auth-service"
   - name: hr-service
-    version: "1.0.0"
+    version: "0.1.0"
     repository: "file://./charts/hr-service"
   - name: finance-service
-    version: "1.0.0"
+    version: "0.1.0"
     repository: "file://./charts/finance-service"
   - name: reporting-service
-    version: "1.0.0"
+    version: "0.1.0"
     repository: "file://./charts/reporting-service"
   - name: frontend
-    version: "1.0.0"
+    version: "0.1.0"
     repository: "file://./charts/frontend"
   - name: inventory-service
     version: "0.1.0"

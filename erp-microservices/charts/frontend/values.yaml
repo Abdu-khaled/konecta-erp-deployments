@@ -6,9 +6,9 @@
 replicaCount: 1
 
 image:
-  repository: konecta-frontend
+  repository: abdelrahman404/konecta-frontend
   pullPolicy: IfNotPresent
-  tag: "develop-29ae71d"
+  tag: "develop-11ee2d9"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -55,16 +55,22 @@ resources:
 
 livenessProbe:
   httpGet:
-    path: /
+    path: /actuator/health
     port: http
-  initialDelaySeconds: 30
+  initialDelaySeconds: 180
   periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+
 readinessProbe:
   httpGet:
-    path: /
+    path: /actuator/health/readiness
     port: http
-  initialDelaySeconds: 10
-  periodSeconds: 5
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 10
+
 
 autoscaling:
   enabled: false
@@ -79,3 +85,5 @@ tolerations: []
 affinity: {}
 
 env: []
+
+
