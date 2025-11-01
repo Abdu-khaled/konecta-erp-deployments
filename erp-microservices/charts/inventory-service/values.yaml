@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: abdelrahman404/konecta-inventory-service
+  repository: konecta-inventory-service
   pullPolicy: IfNotPresent
   tag: "develop-11ee2d9"
 

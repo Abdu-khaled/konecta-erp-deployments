@@ -6,7 +6,7 @@
 replicaCount: 1
 
 image:
-  repository: abdelrahman404/konecta-frontend
+  repository: konecta-frontend
   pullPolicy: IfNotPresent
   tag: "develop-11ee2d9"
 

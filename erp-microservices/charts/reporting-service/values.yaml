@@ -6,7 +6,7 @@
 replicaCount: 1
 
 image:
-  repository: abdelrahman404/konecta-reporting-service
+  repository: konecta-reporting-service
   pullPolicy: IfNotPresent
   tag: "develop-11ee2d9"
 

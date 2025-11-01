@@ -6,7 +6,7 @@
 replicaCount: 1
 
 image:
-  repository: abdelrahman404/konecta-finance-service
+  repository: konecta-finance-service
   pullPolicy: IfNotPresent
   tag: "develop-11ee2d9"
 

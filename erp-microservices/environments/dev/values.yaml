@@ -64,3 +64,37 @@ frontend:
     requests:
       memory: "128Mi"
       cpu: "50m"
+
+
+mailhog:
+  replicaCount: 1
+  image:
+    repository: mailhog/mailhog
+    tag: "latest"
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "50m"
+    limits:
+      memory: "128Mi"
+      cpu: "100m"
+
+inventory-service:
+  replicaCount: 1
+  image:
+    repository: konecta-inventory-service
+    tag: "latest"
+  service:
+    type: ClusterIP
+    port: 8086
+    targetPort: 8085
+  database:
+    host: postgresql
+    name: inventory-service
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
+    limits:
+      memory: "512Mi"
+      cpu: "200m"

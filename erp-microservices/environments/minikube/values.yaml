@@ -21,3 +21,16 @@ frontend:
             pathType: ImplementationSpecific
     tls: []
 
+mailhog:
+  replicaCount: 1
+  resources:
+    requests:
+      memory: "64Mi"
+      cpu: "50m"
+
+inventory-service:
+  replicaCount: 1
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "100m"
