@@ -143,7 +143,7 @@ env:
   - name: SPRING_DATASOURCE_PASSWORD
     value: "1234"
   - name: SPRING_PROFILES_ACTIVE
-    value: "docker"
+    value: "kubernetes"
   - name: SPRING_MAIL_HOST
     value: "mailhog"
   - name: SPRING_MAIL_PORT

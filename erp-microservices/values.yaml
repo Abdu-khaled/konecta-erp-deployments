@@ -1,4 +1,3 @@
-# Base values shared across all environments
 global:
   registry: abdelrahman404
   imagePullPolicy: IfNotPresent
@@ -24,34 +23,49 @@ postgresql:
 discovery-server:
   enabled: true
   image:
-    repository: konecta-discovery-server
+    repository: konecta-discovery-server  
     tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8080
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "kubernetes"
+    - name: EUREKA_INSTANCE_HOSTNAME
+      value: "discovery-server"
 
 config-server:
   image:
-    repository: konecta-config-server
+    repository: konecta-config-server  
     tag: "develop-11ee2d9"
   service:
     type: ClusterIP
     port: 8888
   containerPort: 8080
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "kubernetes"
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: "http://discovery-server:8080/eureka/"
 
 gateway-service:
   image:
-    repository: konecta-gateway-service
+    repository: konecta-gateway-service  
     tag: "develop-11ee2d9"
   service:
     type: LoadBalancer
     port: 8084
   ingress:
     enabled: false
+  env:
+    - name: SPRING_PROFILES_ACTIVE
+      value: "kubernetes"
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: "http://discovery-server:8080/eureka/"
 
 auth-service:
   image:
-    repository: konecta-auth-service
+    repository: konecta-auth-service 
     tag: "develop-11ee2d9"
   service:
     type: ClusterIP
@@ -61,10 +75,31 @@ auth-service:
     name: auth-service
     username: postgres
     password: 1234
+  env:
+    - name: SPRING_DATASOURCE_URL
+      value: "jdbc:postgresql://postgresql:5432/auth-service"
+    - name: SPRING_DATASOURCE_USERNAME
+      value: "postgres"
+    - name: SPRING_DATASOURCE_PASSWORD
+      value: "1234"
+    - name: SPRING_PROFILES_ACTIVE
+      value: "kubernetes"
+    - name: SPRING_MAIL_HOST
+      value: "mailhog"
+    - name: SPRING_MAIL_PORT
+      value: "1025"
+    - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH
+      value: "false"
+    - name: SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE
+      value: "false"
+    - name: APP_MAIL_FROM
+      value: "noreply@konecta-erp.local"
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: "http://discovery-server:8080/eureka/"
 
 hr-service:
   image:
-    repository: konecta-hr-service
+    repository: konecta-hr-service  
     tag: "develop-11ee2d9"
   service:
     type: ClusterIP
@@ -74,10 +109,21 @@ hr-service:
     name: hr-service
     username: postgres
     password: 1234
+  env:
+    - name: SPRING_DATASOURCE_URL
+      value: "jdbc:postgresql://postgresql:5432/hr-service"
+    - name: SPRING_DATASOURCE_USERNAME
+      value: "postgres"
+    - name: SPRING_DATASOURCE_PASSWORD
+      value: "1234"
+    - name: SPRING_PROFILES_ACTIVE
+      value: "kubernetes"
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: "http://discovery-server:8080/eureka/"
 
 finance-service:
   image:
-    repository: konecta-finance-service
+    repository: konecta-finance-service  
     tag: "develop-11ee2d9"
   service:
     type: ClusterIP
@@ -87,10 +133,21 @@ finance-service:
     name: finance-service
     username: postgres
     password: 1234
+  env:
+    - name: SPRING_DATASOURCE_URL
+      value: "jdbc:postgresql://postgresql:5432/finance-service"
+    - name: SPRING_DATASOURCE_USERNAME
+      value: "postgres"
+    - name: SPRING_DATASOURCE_PASSWORD
+      value: "1234"
+    - name: SPRING_PROFILES_ACTIVE
+      value: "kubernetes"
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: "http://discovery-server:8080/eureka/"
 
 reporting-service:
   image:
-    repository: konecta-reporting-service
+    repository: konecta-reporting-service  
     tag: "develop-11ee2d9"
   service:
     type: ClusterIP
@@ -100,10 +157,15 @@ reporting-service:
     name: reporting-service
     username: postgres
     password: 1234
+  env:
+    - name: DOTNET_ENVIRONMENT
+      value: "Development"
+    - name: ConnectionStrings__DefaultConnection
+      value: "Host=postgresql;Port=5432;Database=reporting-service;Username=postgres;Password=1234"
 
 frontend:
   image:
-    repository: konecta-frontend
+    repository: konecta-frontend  
     tag: "develop-11ee2d9"
   service:
     type: ClusterIP
@@ -113,7 +175,7 @@ frontend:
 
 inventory-service:
   image:
-    repository: konecta-inventory-service
+    repository: konecta-inventory-service  
     tag: "develop-11ee2d9"
   service:
     type: ClusterIP
@@ -123,6 +185,17 @@ inventory-service:
     name: inventory-service
     username: postgres
     password: 1234
+  env:
+    - name: SPRING_DATASOURCE_URL
+      value: "jdbc:postgresql://postgresql:5432/inventory-service"
+    - name: SPRING_DATASOURCE_USERNAME
+      value: "postgres"
+    - name: SPRING_DATASOURCE_PASSWORD
+      value: "1234"
+    - name: SPRING_PROFILES_ACTIVE
+      value: "kubernetes"
+    - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+      value: "http://discovery-server:8080/eureka/"
 
 mailhog:
   image:
